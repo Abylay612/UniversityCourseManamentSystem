@@ -8,11 +8,9 @@ public class Main {
         course[3] = new Course("Foreign Language 2", 5, 2);
         course[4] = new Course("Object Oriented Programming", 5, 2);
         course[5] = new Course("Physical Education 2", 2, 2);
-        System.out.println(course[0].displayInfo());
-        System.out.println(course[1].displayInfo());
-        System.out.println(course[2].displayInfo());
-        System.out.println(course[3].displayInfo());
-        System.out.println(course[4].displayInfo());
+        for (int i = 0; i < 5; i++){
+            System.out.println(course[i].displayInfo());
+        }
         System.out.println("ID:" + course[5].getCrs_id());
         System.out.println("CourseName:" + course[5].getCrs_name());
         System.out.println("Credits:" + course[5].getCredits());
@@ -39,11 +37,9 @@ public class Main {
         professor[3] = new Professor("Maria", "Ivanova", "Department of Foreign Languages", "FL-402");
         professor[4] = new Professor("Daniyar", "Kasymov", "Department of Software Engineering", "SE-221");
         professor[5] = new Professor("Aibek", "Nurlanov", "Department of Physical Education", "PE-010");
-        System.out.println(professor[0].displayInfo());
-        System.out.println(professor[1].displayInfo());
-        System.out.println(professor[2].displayInfo());
-        System.out.println(professor[3].displayInfo());
-        System.out.println(professor[4].displayInfo());
+        for (int i = 0; i < 5; i++){
+            System.out.println(professor[i].displayInfo());
+        }
         System.out.println("ID:" + professor[5].getEmployee_id());
         System.out.println("FirstName:" + professor[5].getFirst_name());
         System.out.println("LastName:" + professor[5].getLast_name());
