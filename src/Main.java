@@ -2,7 +2,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Courses:");
         Course[] course = new Course[6];
-        course[0] = new Course("Calculus 3", 5, 2);
+        course[0] = new Course("Calculus 2", 5, 2);
         course[1] = new Course("Database Management System", 5, 2);
         course[2] = new Course("Discrete Mathematics", 5, 2);
         course[3] = new Course("Foreign Language 2", 5, 2);
