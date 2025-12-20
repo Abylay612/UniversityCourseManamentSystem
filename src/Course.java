@@ -47,7 +47,7 @@ public class Course {
         this.semester = semester;
     }
 
-    //ToString
+    //displayInfo
     public String displayInfo(){
         return "ID:" + crs_id + ", CourseName:" + crs_name + ", Credits:" + crs_credits + ", Semester:" + semester;
     }

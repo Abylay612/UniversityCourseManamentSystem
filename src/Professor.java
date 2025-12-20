@@ -57,7 +57,7 @@ public class Professor {
         this.office_number = office_number;
     }
 
-    //toString
+    //displayInfo
     public String displayInfo(){
         return "ID:" + employee_id + ", FirstName:" + first_name + ", LastName:" + last_name + ", Department:" + department + ", Office:" + office_number;
     }
