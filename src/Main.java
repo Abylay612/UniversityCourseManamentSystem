@@ -32,33 +32,35 @@ public class Main {
         System.out.println("Professors:");
         Professor[] professor = new Professor[6];
         professor[0] = new Professor("Aleksei", "Petrov", "Department of Mathematics", "M-214");
-        professor[1] = new Professor("Alya", "Sagyndykova", "Department of Computer Science", "CS-305");
-        professor[2] = new Professor("Timur", "Akhmetov", "Department of Applied Mathematics", "AM-118");
-        professor[3] = new Professor("Maria", "Ivanova", "Department of Foreign Languages", "FL-402");
-        professor[4] = new Professor("Daniyar", "Kasymov", "Department of Software Engineering", "SE-221");
-        professor[5] = new Professor("Aibek", "Nurlanov", "Department of Physical Education", "PE-010");
+        professor[1] = new Professor("Alya", "Sagyndykova","Department of Computer Science", "CS-305");
+        professor[2] = new Professor("Timur", "Akhmetov","Department of Applied Mathematics", "AM-118");
+        professor[3] = new Professor("Maria", "Ivanova","Department of Foreign Languages", "FL-402");
+        professor[4] = new Professor("Daniyar", "Kasymov","Department of Software Engineering", "SE-221");
+        professor[5] = new Professor("Aibek", "Nurlanov","Department of Physical Education", "PE-010");
         for (int i = 0; i < 5; i++){
-            System.out.println(professor[i].displayInfo());
+            System.out.println(professor[i].ToString());
         }
         System.out.println("ID:" + professor[5].getEmployee_id());
-        System.out.println("FirstName:" + professor[5].getFirst_name());
-        System.out.println("LastName:" + professor[5].getLast_name());
         System.out.println("Department:" + professor[5].getDepartment());
         System.out.println("Office:" + professor[5].getOffice_number());
 
-        //Comparison
-        System.out.println(" ");
-        System.out.println("Comparison:");
-        if (course[0].getCredits() > course[5].getCredits()) {
-            System.out.println(course[0].getCrs_name() + " has more credits than " + course[5].getCrs_name());
-        } else {
-            System.out.println(course[5].getCrs_name() + " has more or equal credits than " + course[0].getCrs_name());
-        }
+        //Student
+        Student student = new Student("Aleksey", "Shevcov",3.99,1);
+        System.out.println(student.ToString());
 
-        if (course[0].getCrs_id() > course[5].getCrs_id()) {
-            System.out.println(course[0].getCrs_name() + " has greater id than " + course[5].getCrs_name());
-        } else {
-            System.out.println(course[5].getCrs_name() + " has greater id than " + course[0].getCrs_name());
-        }
+//        //Comparison
+//        System.out.println(" ");
+//        System.out.println("Comparison:");
+//        if (course[0].getCredits() > course[5].getCredits()) {
+//            System.out.println(course[0].getCrs_name() + " has more credits than " + course[5].getCrs_name());
+//        } else {
+//            System.out.println(course[5].getCrs_name() + " has more or equal credits than " + course[0].getCrs_name());
+//        }
+//
+//        if (course[0].getCrs_id() > course[5].getCrs_id()) {
+//            System.out.println(course[0].getCrs_name() + " has greater id than " + course[5].getCrs_name());
+//        } else {
+//            System.out.println(course[5].getCrs_name() + " has greater id than " + course[0].getCrs_name());
+//        }
     }
 }
