@@ -47,8 +47,9 @@ public class Course {
         this.semester = semester;
     }
 
-    //displayInfo
-    public String displayInfo(){
+    //overriding toString method
+    @Override
+    public String toString(){
         return "ID:" + getCrs_id() + ", CourseName:" + getCrs_name() + ", Credits:" + getCredits() + ", Semester:" + getSemester();
     }
 }

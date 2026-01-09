@@ -51,8 +51,9 @@ public class University {
         this.established_year = established_year;
     }
 
-    //displayInfo
-    public String displayInfo(){
-        return "ID:" + uni_id + ", Name:" + uni_name + ", Location:" + location + ", Year:" + established_year;
+    //overriding toString method
+    @Override
+    public String toString(){
+        return "ID:" + getUni_id() + ", Name:" + getName() + ", Location:" + getLocation() + ", Year:" + getYear();
     }
 }

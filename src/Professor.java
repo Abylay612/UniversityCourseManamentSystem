@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Professor extends Person {
     private final int employee_id;
     private static int id_gen = 1;
@@ -5,9 +7,9 @@ public class Professor extends Person {
     private String office_number;
 
     //constructors
-    Professor(String first_name, String last_name, String department, String office_number){
+    Professor(String first_name, String last_name, LocalDate birth_date, String department, String office_number){
         employee_id = id_gen++;
-        super(first_name,last_name);
+        super(first_name,last_name,birth_date);
         setDepartment(department);
         setOffice_number(office_number);
     }
@@ -41,9 +43,9 @@ public class Professor extends Person {
         this.office_number = office_number;
     }
 
-    //toString
+    //overriding toString method
     @Override
     public String toString(){
-        return "ID:" + employee_id + ", FirstName:" + getFirstName() + ", LastName:" + getLastName() + ", Department:" + department + ", Office:" + office_number;
+        return "ID:" + employee_id + ", FirstName:" + getFirstName() + ", LastName:" + getLastName() + ", Age:" + getAge() + ", Department:" + department + ", Office:" + office_number;
     }
 }
