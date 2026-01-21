@@ -43,7 +43,7 @@ void main() throws Exception {
             preparedStatement.setInt(1, student_id);
             preparedStatement.executeUpdate();
         } else if (command == 4) {
-            String sql = "INSERT INTO student (first_name, last_name, gpa, year_of_study) VALUES (?, ?, ?, ?)";
+            String sql = "insert into student (first_name, last_name, gpa, year_of_study) values (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             IO.println("Enter first name:");
