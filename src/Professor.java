@@ -46,6 +46,6 @@ public class Professor extends Person {
     //overriding toString method
     @Override
     public String toString(){
-        return "ID:" + employee_id + ", FirstName:" + getFirstName() + ", LastName:" + getLastName() + ", Age:" + getAge() + ", Department:" + department + ", Office:" + office_number;
+        return "ID:" + getEmployee_id() + ", FirstName:" + getFirstName() + ", LastName:" + getLastName() + ", Age:" + getAge() + ", Department:" + getDepartment() + ", Office:" + getOffice_number();
     }
 }

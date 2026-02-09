@@ -1,14 +1,14 @@
 import java.sql.*;
 
-void main() throws Exception {
+void main() {
     while (true) {
         final String DB_USERNAME = "postgres";
         final String DB_PASSWORD = "A5tr4Fr0mPr025!";
         final String DB_URL = "jdbc:postgresql://localhost:5432/university_course_manament_system";
+try (Scanner scanner = new Scanner(System.in);
+     Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD))
+{
 
-        Scanner scanner = new Scanner(System.in);
-
-        Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
         IO.println("1.Show all records of students in table");
         IO.println("2.Retrieve a single record from student table");
         IO.println("3.Delete one record from student table");
@@ -106,5 +106,16 @@ void main() throws Exception {
         } else {
             System.err.println("Command not found");
         }
+} catch (SQLException e) {
+    System.err.println("Database error:");
+    e.printStackTrace();
+
+} catch (InputMismatchException e) {
+    System.err.println("Invalid input type!");
+
+} catch (Exception e) {
+    System.err.println("Unexpected error:");
+    e.printStackTrace();
+}
     }
 }

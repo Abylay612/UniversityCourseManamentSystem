@@ -20,7 +20,6 @@ public class University {
         setYear(established_year);
     }
 
-
     //getters
     public int getUni_id(){
         return uni_id;

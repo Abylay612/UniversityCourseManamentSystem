@@ -1,7 +1,6 @@
 void main() throws Exception {
 
-    //Creating instances of class Course
-    IO.println("Courses:");
+    //Creating instances of the class Course
     Course[] course = new Course[6];
     course[0] = new Course("Calculus 2", 5, 2);
     course[1] = new Course("Database Management System", 5, 2);
@@ -10,20 +9,13 @@ void main() throws Exception {
     course[4] = new Course("Object Oriented Programming", 5, 2);
     course[5] = new Course("Physical Education 2", 2, 2);
 
-    //Outputting all courses information by toString method using loop
-    for (int i = 0; i < 6; i++) {
-        IO.println(course[i].toString());
-    }
 
-    //Creating single university object of class University
-    IO.println(" ");
-    IO.println("University:");
+    //Creating the single university object of a class University
     University university = new University("Astana IT University", "Astana, Mangilik El Avenue, 55/11", 2019);
     IO.println(university);
 
-    //Creating instances of class Professor
-    IO.println(" ");
-    IO.println("Professors:");
+
+    //Creating instances of the class Professor
     Professor[] professor = new Professor[6];
     professor[0] = new Professor("Aleksei", "Petrov", LocalDate.of(1962, 6, 6), "Department of Mathematics", "M-214");
     professor[1] = new Professor("Alya", "Sagyndykova", LocalDate.of(1975, 3, 28), "Department of Computer Science", "CS-305");
@@ -32,26 +24,16 @@ void main() throws Exception {
     professor[4] = new Professor("Daniyar", "Kasymov", LocalDate.of(1956, 9, 25), "Department of Software Engineering", "SE-221");
     professor[5] = new Professor("Aibek", "Nurlanov", LocalDate.of(1975, 8, 5), "Department of Physical Education", "PE-010");
 
-    //Outputting all professors information by toString method using loop
-    for (int i = 0; i < 6; i++) {
-        IO.println(professor[i].toString());
-    }
 
-    //Creating instances of class Student
-    IO.println(" ");
-    IO.println("Students:");
+    //Creating instances of the class Student
     Student[] student = new Student[6];
     student[0] = new Student("Timur", "Bekzhanov", LocalDate.of(2007, 5, 17), 2.63, 1);
-    student[1] = new Student("Dana", "Sadykova", LocalDate.of(2007, 8, 24), 3.54, 3);
-    student[2] = new Student("Nursultan", "Akhmetov", LocalDate.of(2007, 7, 3), 2.54, 2);
+    student[1] = new Student("Dana", "Sadykova", LocalDate.of(2007, 8, 24), 3.54, 1);
+    student[2] = new Student("Nursultan", "Akhmetov", LocalDate.of(2007, 7, 3), 2.54, 1);
     student[3] = new Student("Ali", "Kenzhebayev", LocalDate.of(2007, 3, 16), 3.65, 1);
-    student[4] = new Student("Aisha", "Zholdasova", LocalDate.of(2007, 4, 25), 3.57, 3);
+    student[4] = new Student("Aisha", "Zholdasova", LocalDate.of(2007, 4, 25), 3.57, 1);
     student[5] = new Student("Sara", "Tursynbekova", LocalDate.of(2007, 6, 15), 2.81, 1);
 
-    //Outputting all students information by toString method using loop
-    for (int i = 0; i < 6; i++) {
-        IO.println(student[i].toString());
-    }
 
     //Comparison
     IO.println(" ");
@@ -68,36 +50,51 @@ void main() throws Exception {
         IO.println(course[5].getCrs_name() + " has greater id than " + course[0].getCrs_name());
     }
 
-    //Filtering data
-    IO.println(" ");
-    IO.println("Filtering data: ");
-    ArrayList<Student> topStudents = new ArrayList<>();
-    for (int i = 0; i < 6; i++) {
-        if (student[i].getGpa() >= 3.5) {
-            topStudents.add(student[i]);
-        }
-    }
 
-    //Output
-    for (Student s : topStudents) {
-        IO.println(s.getFullName());
-    }
+    //Creating object of the class StudentManager to search, filter, sort the data about students
+    StudentManager manager = new StudentManager();
 
-    //Sorting data
-    IO.println(" ");
-    IO.println("Sorting data:");
-    for (int i = 0; i < student.length - 1; i++) {
-        for (int j = 0; j < student.length - i - 1; j++) {
-            if (student[j].getGpa() > student[j + 1].getGpa()) {
-                Student temp = student[j];
-                student[j] = student[j + 1];
-                student[j + 1] = temp;
+    //Adding objects of the Student class to store them in array
+    for (Student s: student){
+        StudentManager.addStudent(s);
+    }
+    Scanner scanner = new Scanner(System.in);
+
+    //Creating a console application to implement methods of the StudentManager class
+        try{
+            while (true){
+                IO.println("1.Find by id");
+                IO.println("2.Filter by gpa");
+                IO.println("3.Get all students");
+                IO.println("4.Sort by GPA");
+                IO.println("5.Sort by ID");
+                IO.println("6.Exit");
+
+                IO.println("Enter command number:");
+                int command = scanner.nextInt();
+
+                if (command == 1){
+                    IO.println("Enter student id:");
+                    StudentManager.findById(scanner.nextInt());
+                } else if (command == 2) {
+                    IO.println("Enter minimal GPA for filtration:");
+                    StudentManager.filterByGpa(scanner.nextDouble());
+                } else if (command == 3) {
+                    StudentManager.getAllStudents();
+                } else if (command == 4) {
+                    StudentManager.sortByGpa();
+                    IO.println("Students sorted by GPA");
+                } else if (command == 5) {
+                    StudentManager.sortById();
+                    IO.println("Students sorted by ID");
+                } else if (command == 6) {
+                    break;
+                } else{
+                    IO.println("This command does not exist");
+                }
             }
         }
-    }
-
-    //Output
-    for (Student s : student) {
-        IO.println(s.getFullName() + " - GPA: " + s.getGpa());
-    }
+        catch (InputMismatchException e){
+            IO.println("The number must be entered: " + e.getMessage());
+        }
 }

@@ -28,6 +28,9 @@ public class Student extends Person{
         return year_of_study;
     }
 
+    public int getStudent_id() { return student_id; }
+
+
     //setters
     public void setGpa(double gpa){
         if (gpa >= 0.0 && gpa <= 4.0){
