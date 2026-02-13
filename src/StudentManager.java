@@ -1,69 +1,68 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
-public class StudentManager {
-    private static final ArrayList<Student> students = new ArrayList<>();
+public class StudentManager implements Manager<Student>{
+    private final ArrayList<Student> students = new ArrayList<>();
 
-    public static void addStudent(Student student){
-        students.add(student);
+    @Override
+    public void add(Student s){
+        students.add(s);
     }
 
-    public static void getAllStudents(){
-        for (Student s: students){
-            IO.println(s.getFullName() + "- GPA: " + s.getGpa() + " YearOfStudy: "
-                    + s.getYear_of_study());
-        }
+    @Override
+    public List<Student> getAll(){
+        return students;
     }
 
-    public static void findById(int id){
+    //Finding students by id
+    @Override
+    public Student findById(String id){
         for (Student s: students){
-            if (s.getStudent_id() == id){
-                IO.println(s.getFullName() + "- GPA: " + s.getGpa() + " YearOfStudy: "
-                        + s.getYear_of_study());
+            if (Objects.equals(s.getId(), id)){
+                return s;
             }
         }
+        return null;
     }
 
-    public static void filterByGpa(double gpa){
+    //Finding students by id in ascending order
+    @Override
+    public void sortById() {
+        students.sort(Comparator.comparing(Student::getId));
+    }
+
+    //Finding students by firstname
+    @Override
+    public Student findByName(String name){
+        for (Student s: students){
+            if (s.getFirstName().equalsIgnoreCase(name)){
+                return s;
+            }
+        }
+        return null;
+    }
+
+    //Case-insensitive name sorting
+    @Override
+    public void sortByName() {
+        students.sort(Comparator.comparing(
+                Student::getFirstName,
+                String.CASE_INSENSITIVE_ORDER
+        ));
+    }
+
+    //Filtering GPA by entered value
+    public List<Student> filterByGpa(double gpa){
+        List<Student> result = new ArrayList<>();
         for (Student s: students){
             if (s.getGpa() >= gpa) {
-                IO.println(s.getFullName() + "- GPA: " + s.getGpa() + " YearOfStudy: "
-                        + s.getYear_of_study());
+                result.add(s);
             }
         }
+        return null;
     }
 
-    public static void sortByGpa(){
-        for (int i = 0; i < students.size() - 1; i++) {
-            for (int j = i + 1; j < students.size(); j++) {
-                if (students.get(i).getGpa() < students.get(j).getGpa()) {
-                    Student temp = students.get(i);
-                    students.set(i, students.get(j));
-                    students.set(j, temp);
-                }
-            }
-        }
-    }
-
-    public static void sortById(){
-        for (int i = 0; i < students.size() - 1; i++) {
-            for (int j = i + 1; j < students.size(); j++) {
-                if (students.get(i).getStudent_id() < students.get(j).getStudent_id()) {
-                    Student temp = students.get(i);
-                    students.set(i, students.get(j));
-                    students.set(j, temp);
-                }
-            }
-        }
-    }
-
-    public void sortByFirstName() {
-        students.sort(new Comparator<Student>() {
-            @Override
-            public int compare(Student s1, Student s2) {
-                return s1.getFirstName().compareTo(s2.getFirstName());
-            }
-        });
+    //Sortation of students by GPA in ascending order
+    public void sortByGpa() {
+        students.sort(Comparator.comparingDouble(Student::getGpa).reversed());
     }
 }

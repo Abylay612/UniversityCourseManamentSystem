@@ -1,25 +1,23 @@
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Student extends Person{
-    private final int student_id;
-    private static int id_gen = 1;
     private double gpa;
     private int year_of_study;
 
-    Student(String first_name, String last_name, LocalDate birth_date, double gpa, int year_of_study){
-        student_id = id_gen++;
-        super(first_name,last_name,birth_date);
+    Student(String student_id, String first_name, String last_name, LocalDate birth_date, double gpa, int year_of_study){
+        super(student_id,first_name,last_name,birth_date);
         setGpa(gpa);
         setYear_of_study(year_of_study);
     }
 
-    //role
+    //Role of student
     @Override
     public String getRole(){
-        return "Studying";
+        return "Learning";
     }
 
-    //getters
+    //Getters
     public double getGpa(){
         return gpa;
     }
@@ -28,10 +26,7 @@ public class Student extends Person{
         return year_of_study;
     }
 
-    public int getStudent_id() { return student_id; }
-
-
-    //setters
+    //Setters
     public void setGpa(double gpa){
         if (gpa >= 0.0 && gpa <= 4.0){
             this.gpa = gpa;
@@ -48,8 +43,30 @@ public class Student extends Person{
         this.year_of_study = year_of_study;
     }
 
+    //Overriding toString method
     @Override
     public String toString() {
-        return "ID:" + student_id + ", FirstName:" + getFirstName() + ", LastName:" + getLastName() + ", Age:" + getAge() +  ", GPA:" + getGpa() + ", YearOfStudy:" + getYear_of_study();
+        return "Id:" + getId() + ", FullName:" + getFullName() + ", Age:" + getAge() + ", GPA:"
+                + getGpa() + ", YearOfStudy:" + getYear_of_study() + " ,DateOfBirth:"
+                + getBirth_date() + ", Role:" + getRole();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student s)) return false;
+        return Objects.equals(this.getId(), s.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName());
+    }
+
+    //displayInfo method
+    @Override
+    public void displayInfo(){
+        IO.println("Id:" + getId() + " Name:" + getFullName() + " GPA:"
+                + getGpa() + " YearOfStudy:" + getYear_of_study());
     }
 }

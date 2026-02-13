@@ -2,27 +2,27 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public abstract class Person {
+    private final String id;
     private String first_name;
     private String last_name;
     private LocalDate birth_date;
 
-    Person(String first_name,String last_name,LocalDate birth_date){
+    Person(String id, String first_name,String last_name,LocalDate birth_date){
+        this.id = id;
         setFirst_name(first_name);
         setLast_name(last_name);
         setBirth_date(birth_date);
     }
 
-    //role
-    public  abstract String getRole();
+    //Types of roles
+    public abstract String getRole();
 
-    //getters
-    public String getFirstName(){
-        return first_name;
-    };
+    //Getters
+    public String getFirstName(){return first_name;};
 
-    public String getLastName(){
-        return last_name;
-    };
+    public String getLastName(){ return last_name; };
+
+    public String getId(){ return id; }
 
     public String getFullName(){
         return getFirstName() + " " + getLastName();
@@ -36,7 +36,7 @@ public abstract class Person {
         return Period.between(birth_date, LocalDate.now()).getYears();
     }
 
-    //setters
+    //Setters
     public void setFirst_name(String first_name){
         this.first_name = first_name;
     }
@@ -49,6 +49,8 @@ public abstract class Person {
         this.birth_date = birth_date;
     }
 
-    //ToString
+    //ToString and displayInfo
     public abstract String toString();
+
+    public abstract void displayInfo();
 }
