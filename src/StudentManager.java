@@ -58,7 +58,7 @@ public class StudentManager implements Manager<Student>{
                 result.add(s);
             }
         }
-        return null;
+        return result;
     }
 
     //Sortation of students by GPA in ascending order

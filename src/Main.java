@@ -3,9 +3,12 @@ void main() {
     University university = new University("Astana IT University", "Astana, Mangilik El Avenue, 55/11", 2019);
     IO.println(university);
 
+
+    //Managers
     StudentManager studentManager = new StudentManager();
     ProfessorManager professorManager = new ProfessorManager();
     CourseManager courseManager = new CourseManager();
+
 
     //Creating instances of the class Course
     Course[] course = new Course[6];
@@ -46,31 +49,40 @@ void main() {
         IO.println(course[5].getCrs_name() + " has more or equal credits than " + course[0].getCrs_name());
     }
 
+    Scanner scanner = new Scanner(System.in);
+
 
     //Creating object of the class Manager to search, filter, sort the data
     while(true){
-        Scanner scanner = new Scanner(System.in);
-        IO.println("1.StudentManager\n2.ProfessorManager\n3.CourseManager\n4.Exit\nEnter command number:");
-        int command = scanner.nextInt();
+        try {
+            IO.println("\nChoose manager:\n1.StudentManager\n2.ProfessorManager\n3.CourseManager\n4.Exit\nEnter command number:");
+            int command = scanner.nextInt();
+            scanner.nextLine();
 
-        switch (command){
-            case 1:
-                student_manager(studentManager,student);
-                break;
-            case 2:
-                professor_manager(professorManager,professor);
-                break;
-            case 3:
-                course_manager(courseManager,course);
-                break;
-            case 4:
-                return;
-            default:
-                IO.println("This command does not exist");
+            switch (command){
+                case 1:
+                    student_manager(studentManager,student);
+                    break;
+                case 2:
+                    professor_manager(professorManager,professor);
+                    break;
+                case 3:
+                    course_manager(courseManager,course);
+                    break;
+                case 4:
+                    return;
+                default:
+                    IO.println("This command does not exist");
+            }
+        }
+        catch (InputMismatchException e){
+            IO.println("Please enter a valid number!");
+            scanner.nextLine();
         }
     }
 }
 
+//Student manager function
 private void student_manager(StudentManager manager,Student[] student) {
     Scanner sc = new Scanner(System.in);
 
@@ -79,9 +91,10 @@ private void student_manager(StudentManager manager,Student[] student) {
     }
 
     while(true){
-        IO.println("1.Get all students\n2.Find by id\n3.Sort by id\n4.Find by name\n5.Sort by name\n6.Filter by GPA\n7.Sort by GPA\n8.Exit");
-        IO.println(" ");
+        IO.println("\nChoose an option:\n1.Get all students\n2.Find by id\n3.Sort by id\n4.Find by name\n5.Sort by name\n6.Filter by GPA\n7.Sort by GPA\n8.Exit\nEnter command number:");
         int command1 = sc.nextInt();
+        sc.nextLine();
+
         switch(command1){
             case 1:
                 for(Student s: manager.getAll()){
@@ -90,17 +103,31 @@ private void student_manager(StudentManager manager,Student[] student) {
                 break;
             case 2:
                 IO.println("Enter student id:");
-                sc.nextLine();
-                manager.findById(sc.nextLine()).displayInfo();
+                String id = sc.nextLine();
+
+                Student found = manager.findById(id);
+
+                if (found != null) {
+                    found.displayInfo();
+                } else {
+                    IO.println("Student not found");
+                }
                 break;
             case 3:
                 manager.sortById();
                 IO.println("Sorted by id");
                 break;
             case 4:
-                IO.println("Enter name:");
-                sc.nextLine();
-                manager.findByName(sc.nextLine()).displayInfo();
+                IO.println("Enter student name:");
+                String name = sc.nextLine();
+
+                Student found1 = manager.findById(name);
+
+                if (found1 != null) {
+                    found1.displayInfo();
+                } else {
+                    IO.println("Student not found");
+                }
                 break;
             case 5:
                 manager.sortByName();
@@ -109,7 +136,10 @@ private void student_manager(StudentManager manager,Student[] student) {
             case 6:
                 IO.println("Enter GPA to filter:");
                 sc.nextLine();
-                manager.filterByGpa(sc.nextDouble());
+                for(Student s: manager.filterByGpa(sc.nextDouble())){
+                    s.displayInfo();
+                }
+                break;
             case 7:
                 manager.sortByGpa();
                 IO.println("Sorted by GPA");
@@ -122,6 +152,7 @@ private void student_manager(StudentManager manager,Student[] student) {
     }
 }
 
+//Professor manager function
 private void professor_manager(ProfessorManager manager,Professor[] professor) {
     Scanner sc = new Scanner(System.in);
 
@@ -130,25 +161,34 @@ private void professor_manager(ProfessorManager manager,Professor[] professor) {
     }
 
     while(true){
-        IO.println("1.Get all professors\n2.Find by id\n3.Sort by id\n4.Find by name\n5.Sort by name\n6.Find by office number\n7.Find by department\n8.Exit");
-        IO.println(" ");
+        IO.println("\nChoose an option:\n1.Get all professors\n2.Find by id\n3.Sort by id\n4.Find by name\n5.Sort by name\n6.Find by office number\n7.Find by department\n8.Exit\nEnter command number:");
         int command1 = sc.nextInt();
+        sc.nextLine();
+
         switch(command1){
             case 1:
                 for(Professor p: manager.getAll()){
                     p.displayInfo();
                 }
+                break;
             case 2:
                 IO.println("Enter professor id:");
-                sc.nextLine();
-                manager.findById(sc.nextLine()).displayInfo();
+                String name = sc.nextLine();
+
+                Professor found = manager.findByName(name);
+
+                if (found != null) {
+                    found.displayInfo();
+                } else {
+                    IO.println("Professor not found");
+                }
                 break;
             case 3:
                 manager.sortById();
                 IO.println("Sorted by id");
                 break;
             case 4:
-                IO.println("Enter name:");
+                IO.println("Enter professor name:");
                 sc.nextLine();
                 manager.findByName(sc.nextLine());
                 break;
@@ -158,12 +198,26 @@ private void professor_manager(ProfessorManager manager,Professor[] professor) {
                 break;
             case 6:
                 IO.println("Enter office number:");
-                sc.nextLine();
-                manager.findByOffice(sc.nextLine()).displayInfo();
+                String office_number = sc.nextLine();
+
+                Professor found1 = manager.findByOffice(office_number);
+
+                if (found1 != null) {
+                    found1.displayInfo();
+                } else {
+                    IO.println("Professor not found");
+                }
             case 7:
                 IO.println("Enter department:");
-                sc.nextLine();
-                manager.findByDepartment(sc.nextLine()).displayInfo();
+                String department = sc.nextLine();
+
+                Professor found2 = manager.findByDepartment(department);
+
+                if (found2 != null) {
+                    found2.displayInfo();
+                } else {
+                    IO.println("Professor not found");
+                }
             case 8:
                 return;
             default:
@@ -172,6 +226,7 @@ private void professor_manager(ProfessorManager manager,Professor[] professor) {
     }
 }
 
+//Course manager function
 private void course_manager(CourseManager manager,Course[] course) {
     Scanner sc = new Scanner(System.in);
 
@@ -180,9 +235,10 @@ private void course_manager(CourseManager manager,Course[] course) {
     }
 
     while(true){
-        IO.println("1.Get all courses\n2.Find by id\n3.Sort by id\n4.Find by name\n5.Sort by name\n6.Exit");
-        IO.println(" ");
+        IO.println("\nChoose an option:\n1.Get all courses\n2.Find by id\n3.Sort by id\n4.Find by name\n5.Sort by name\n6.Exit\nEnter command number:");
         int command1 = sc.nextInt();
+        sc.nextLine();
+
         switch(command1){
             case 1:
                 for(Course c: manager.getAll()){
@@ -190,18 +246,32 @@ private void course_manager(CourseManager manager,Course[] course) {
                 }
                 break;
             case 2:
-                IO.println("Enter course id:");
-                sc.nextLine();
-                manager.findById(sc.nextLine()).displayInfo();
+                IO.println("Enter course code:");
+                String crs_code = sc.nextLine();
+
+                Course found = manager.findById(crs_code);
+
+                if (found != null) {
+                    found.displayInfo();
+                } else {
+                    IO.println("Course not found");
+                }
                 break;
             case 3:
                 manager.sortById();
                 IO.println("Sorted by id");
                 break;
             case 4:
-                IO.println("Enter name:");
-                sc.nextLine();
-                manager.findByName(sc.nextLine()).displayInfo();
+                IO.println("Enter course name:");
+                String crs_name = sc.nextLine();
+
+                Course found1 = manager.findByName(crs_name);
+
+                if (found1 != null) {
+                    found1.displayInfo();
+                } else {
+                    IO.println("Course not found");
+                }
                 break;
             case 5:
                 manager.sortByName();
